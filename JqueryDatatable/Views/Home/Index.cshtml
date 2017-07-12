@@ -1,0 +1,116 @@
+﻿<table id="example">
+    <thead>
+        <tr>
+            <th>CustomerID</th>
+            <th>PackageName</th>
+            <th>Reporter</th>
+            <th>Load</th>
+            <th>Location</th>
+            <th>Dep</th>
+        </tr>
+    </thead>
+</table>
+
+<link type="text/css" href="https://cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet">
+
+@section Scripts{
+    @*<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>*@
+    <script src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+    @*<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>*@
+    <script>
+        $(document).ready(function () {
+
+            $("#example").DataTable({
+                "processing": true,//for showing progress bar
+                "serverSide": true,//processing server side
+                //"filter": false,//disable filter
+                "orderMulti": false,//disable multiple column at once
+                //"deferRender": true,
+                "pagination": true,
+                //"pageLength":5,
+                "pagingType": "full_numbers",
+                "ajax": {
+                    "url": "/Home/LoadData", //controller and actions
+                    "type": "POST",
+                    "datatype": "json",
+                    "success": function () {
+                        alert("success");
+                    },
+                    "error": function (jqXHR, exception) {
+                        var msg = '';
+                        if (jqXHR.status === 0) {
+                            msg = 'Not connect.\n Verify Network.';
+                        } else if (jqXHR.status == 404) {
+                            msg = 'Requested page not found. [404]';
+                        } else if (jqXHR.status == 500) {
+                            msg = 'Internal Server Error [500].';
+                        } else if (exception === 'parsererror') {
+                            msg = 'Requested JSON parse failed.';
+                        } else if (exception === 'timeout') {
+                            msg = 'Time out error.';
+                        } else if (exception === 'abort') {
+                            msg = 'Ajax request aborted.';
+                        } else {
+                            msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                        }
+                        $('#post').html(msg);
+                    },
+                },
+               
+                "columns": [
+                  { "data": "CustomerID", "name": "CustomerID", "autoWidth": true },
+                  { "data": "PackageName", "name": "PackageName", "autoWidth": true },
+                  { "data": "Reporter", "name": "Reporter", "autoWidth": true },
+                  { "data": "Load", "name": "Load", "autoWidth": true },
+                  { "data": "Location", "name": "Location", "autoWidth": true },
+                  { "data": "Dep", "name": "Dep", "autoWidth": true },
+                ],
+                //this method will give you pageno,pagestart,pageend and length
+                //"fnDrawCallback": function () {
+                //    debugger;
+                //    pageNo = this.api().page.info().page + 1;
+                //    start = this.api().page.info().start + 1;
+                //    var end = this.api().page.info().end;
+                //    var length = this.api().page.info().length;
+
+                //    alert("pageNo =" + pageNo + " " + "PageStart =" + start + " " + "PageEnd =" + end + " " + "length =" + length); // this alerts correct page
+                //}
+            });
+
+
+
+            //    var oTable = $('#example').dataTable({
+            //        "sScrollY": "300px",
+            //        "sScrollX": "100%",
+            //        "sScrollXInner": "150%",
+            //        "bScrollCollapse": true,
+            //        "bProcessing": true,
+            //        "bServerSide": true,
+            //        'bPaginate': true,
+            //        'bFilter': false,
+            //        "sAjaxSource": 'Home/LoadData',
+            //        'sPaginationType': 'full_numbers',
+            //        'iDisplayLength': 5,
+            //        "aoColumns": [
+            //              { "sName": "CustomerID" },
+            //              { "sName": "PackageName" },
+            //              { "sName": "Reporter" },
+            //              { "sName": "Load" },
+            //              { "sName": "Location" },
+            //              { "sName": "Dep" }
+            //        ]
+
+            //    , "fnInitComplete": function () {
+            //        new FixedColumns(oTable, {
+            //            "iLeftColumns": 2,
+            //            "iLeftWidth": 350
+            //        });
+            //    }
+            //});
+
+
+        });
+
+    </script>
+}
+

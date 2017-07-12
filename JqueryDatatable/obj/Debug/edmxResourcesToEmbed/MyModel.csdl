@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SampleDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="SampleCustomer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PackageName" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+    <Property Name="Reporter" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="Load" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="Location" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="Dep" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="SampleDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="SampleCustomers" EntityType="Self.SampleCustomer" />
+  </EntityContainer>
+</Schema>

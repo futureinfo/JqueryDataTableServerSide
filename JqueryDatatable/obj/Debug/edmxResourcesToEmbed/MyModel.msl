@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SampleDBModelStoreContainer" CdmEntityContainer="SampleDBEntities">
+    <EntitySetMapping Name="SampleCustomers">
+      <EntityTypeMapping TypeName="SampleDBModel.SampleCustomer">
+        <MappingFragment StoreEntitySet="SampleCustomer">
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+          <ScalarProperty Name="Reporter" ColumnName="Reporter" />
+          <ScalarProperty Name="Load" ColumnName="Load" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Dep" ColumnName="Dep" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
